@@ -26,3 +26,6 @@ Thumbs.db
 *.pem
 *.key
 secrets/
+
+# Claude Code
+CLAUDE.md
