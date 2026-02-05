@@ -1,16 +1,15 @@
 # Output values
 
 # Kubernetes
-# Note: K8s outputs require a write-enabled token. Uncomment when available.
-# output "k8s_endpoint" {
-#   description = "Kubernetes cluster API endpoint"
-#   value       = digitalocean_kubernetes_cluster.main.endpoint
-# }
-#
-# output "k8s_cluster_id" {
-#   description = "Kubernetes cluster ID"
-#   value       = digitalocean_kubernetes_cluster.main.id
-# }
+output "k8s_endpoint" {
+  description = "Kubernetes cluster API endpoint"
+  value       = digitalocean_kubernetes_cluster.main.endpoint
+}
+
+output "k8s_cluster_id" {
+  description = "Kubernetes cluster ID"
+  value       = digitalocean_kubernetes_cluster.main.id
+}
 
 # Database
 output "database_host" {
