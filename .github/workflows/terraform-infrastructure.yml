@@ -1,21 +1,31 @@
-name: Terraform Plan
+name: Terraform Infrastructure
 
 on:
   pull_request:
     branches:
       - main
+    paths:
+      - 'infrastructure/**'
+      - '.github/workflows/terraform-infrastructure.yml'
   push:
     branches:
       - main
+    paths:
+      - 'infrastructure/**'
+      - '.github/workflows/terraform-infrastructure.yml'
 
 env:
   TF_VAR_do_token: ${{ secrets.DIGITALOCEAN_API_TOKEN }}
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
+defaults:
+  run:
+    working-directory: infrastructure
+
 jobs:
   terraform:
-    name: Terraform
+    name: Infrastructure
     runs-on: ubuntu-latest
 
     steps:
@@ -53,7 +63,9 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const output = `#### Terraform Format 🖌 \`${{ steps.fmt.outcome }}\`
+            const output = `## Infrastructure Plan
+
+            #### Terraform Format 🖌 \`${{ steps.fmt.outcome }}\`
             #### Terraform Init ⚙️ \`${{ steps.init.outcome }}\`
             #### Terraform Validate 🤖 \`${{ steps.validate.outcome }}\`
             #### Terraform Plan 📖 \`${{ steps.plan.outcome }}\`
